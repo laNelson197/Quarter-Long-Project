@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "5a410c1c-fb7c-4d3d-87d8-1f9f39e3f043",
+		"name": "Quarter long Project",
+		"description": "A craft store website for inventory and customer data\n\n**Author**: Lillian Nelson\n\n**Class**: SDEV 372\n\n**Quarter**: Fall 2024\n\nEndpoints:\n\n- /products - accesses all product records\n    \n- /products/1 - acceses product by ID\n    \n- /products - add a product\n    \n- /products/1 - update product by ID\n    \n- /produdcts/1 - delete product by ID\n    \n- /customers - acceses all customer records",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38879767"
+	},
+	"item": [
+		{
+			"name": "All products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						""
+					]
+				},
+				"description": "Retrieves all products from database\n\nResponces:\n\n- 200 (OK) - returning all products"
+			},
+			"response": []
+		},
+		{
+			"name": "Product By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/products/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"1"
+					]
+				},
+				"description": "Retrieves a product that matches the path variable ID\n\nResponces:\n\n- 200 (OK) - returning product\n    \n- 404 (NOT FOUND) - product not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"Glue gun\",\r\n    \"productDescription\": \"Hot glue gun\",\r\n    \"price\": 14.99,\r\n    \"inStock\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/products/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						""
+					]
+				},
+				"description": "Adds a new product. heres an exaple request body:\n\nStartFragment\n\n``` json\n{\n    \"productName\": \"Glue gun\",\n    \"productDescription\": \"Hot glue gun\",\n    \"price\": 14.99,\n    \"inStock\": 4\n}\n\n ```\n\nEndFragment\n\nResponces:\n\n- 200 (OK) - Product was created successfully"
+			},
+			"response": []
+		},
+		{
+			"name": "Update product",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"Knitting Needles\",\r\n    \"productDescription\": \"Needles in a range of sizes\",\r\n    \"price\": 5.99,\r\n    \"inStock\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/products/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"1"
+					]
+				},
+				"description": "Updates a existing product based on ID, heres an exaples:\n\nStartFragment\n\n``` json\n{\n    \"productName\": \"Knitting Needles\",\n    \"productDescription\": \"Needles in a range of sizes\",\n    \"price\": 5.99,\n    \"inStock\": 10\n}\n\n ```\n\nEndFragment  \n  \nResponces:\n\n- 200 (OK) - product sucessfully updated\n    \n- 404 (NOT FOUND) - product with id not found"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/products/17",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products",
+						"17"
+					]
+				},
+				"description": "Deletes a product with specifyed ID\n\nResponces:\n\n- 200 (OK) - sucessfully removed product"
+			},
+			"response": []
+		},
+		{
+			"name": "All customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"customers"
+					]
+				},
+				"description": "Retrieves all customers from customer controller\n\nResponces:\n\n- 200 (OK) - returned all customers"
+			},
+			"response": []
+		}
+	]
+}
