@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f3e6ff;
+    font-family: 'Arial', sans-serif;
+    color: #5d3d8c;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #6a3c92;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+h3 {
+    color: #6a3c92;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #d1a6f7;
+}
+
+th {
+    background-color: #d0a6f4;
+    color: white;
+    font-size: 18px;
+}
+
+td {
+    background-color: #fff;
+}
+
+button {
+    background-color: #9b58b6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6a3c92;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #d1a6f7;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: #9b58b6;
+    outline: none;
+}
+
+tbody tr:hover {
+    background-color: #f1e0ff;
+}
+
+/* For small screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

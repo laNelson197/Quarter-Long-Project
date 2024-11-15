@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${product.productDescription}</td>
             <td>${product.price}</td>
             <td>${product.inStock}</td>
-            <td>${product.createdAt || 'N/A'}</td>
+            <td>${product.createdAt}</td>
             <td>
                 <button class="edit-btn">Edit</button>
                 <button class="delete-btn">Delete</button>

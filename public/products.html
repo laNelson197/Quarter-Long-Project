@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Table</title>
+    <link rel="stylesheet" href="prodStyles.css">
+
 </head>
 <body>
     <h1>Inventory</h1>
@@ -18,8 +20,7 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Date</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Edit / Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +29,7 @@
     </table>
 
     <!-- Form to add new product -->
-    <h3>Add New Product</h3>
+    <h1>Add New Product</h1>
     <form id="addProductForm">
         <input type="number" id="productId" placeholder="Product ID" required>
         <input type="text" id="productName" placeholder="Product Name" required>
