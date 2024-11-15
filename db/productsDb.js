@@ -40,9 +40,8 @@ async function getProductById(id) {
 }
 
 // Add Product
-async function addProduct(productName, price, productDescription, inStock) {
-    const [result] = await connect.query("INSERT INTO products (productName, price, productDescription, inStock) VALUES (?, ?, ?, ?)", 
-        [productName, price, productDescription, inStock]);
+async function addProduct(productName, productDescription, price, inStock) {
+    const [result] = await connect.query("INSERT INTO products (productName, productDescription, price, inStock) VALUES (?, ?, ?, ?)", [productName, productDescription, price, inStock]);
     return result;
 }
 

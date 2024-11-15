@@ -31,7 +31,7 @@ export const getById = async (req, res) => {
 // Add product
 export const addProd = async (req, res) => {
     const { productName, productDescription, price, inStock } = req.body;
-    const result = await db.addProduct(productName, price, productDescription, inStock);
+    const result = await db.addProduct(productName, productDescription, price, inStock);
 
     res.status(201).send({
         message: `Product saved with ID: ${result.insertId}`
