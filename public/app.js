@@ -7,30 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const productPriceInput = document.getElementById('productPrice');
     const productStockInput = document.getElementById('inStock');
 
-    // Fetch and display products when page loads
     fetchProducts();
 
     // Form submission to add a new product
     addProductForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevent form from refreshing the page
-
-        // Extract values from the form inputs
         const productId = parseFloat(productIdInput.value);
         const productName = productNameInput.value;
         const productDescription = productDescriptionInput.value;
         const productPrice = parseFloat(productPriceInput.value);
         const productStock = parseFloat(productStockInput.value);
 
-        // Log the form data (for debugging)
-        console.log({
-            productId: productId,
-            productName: productName,
-            productDescription: productDescription,
-            productPrice: productPrice,
-            productStock: productStock
-        });
-
-        // Send POST request to add a new product
         try {
             const response = await fetch('http://localhost:3000/products', {
                 method: 'POST',
@@ -38,20 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    productId: productId,
-                    productName: productName,
-                    productDescription: productDescription,
+                    productId,
+                    productName,
+                    productDescription,
                     price: productPrice,
                     inStock: productStock
                 })
             });
 
-            // Check if the response is OK
             if (response.ok) {
                 const newProduct = await response.json();
                 console.log('New product added:', newProduct);
-                addProductRow(newProduct); // Update the table with the new product
-                addProductForm.reset(); // Clear the form
+
+                addProductRow(newProduct);
+                addProductForm.reset();
             } else {
                 const errorData = await response.json();
                 console.error('Failed to add product:', errorData.message);
@@ -60,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error adding product:', error);
         }
     });
+
 
     // Function to fetch all products from the API
     async function fetchProducts() {
@@ -85,17 +72,142 @@ document.addEventListener('DOMContentLoaded', () => {
     function addProductRow(product) {
         const row = productTableBody.insertRow();
 
+        row.setAttribute('data-id', product.productId);
+
         row.innerHTML = `
             <td>${product.productId}</td>
             <td>${product.productName}</td>
             <td>${product.productDescription}</td>
             <td>${product.price}</td>
             <td>${product.inStock}</td>
-            <td>${product.createdAt}</td>
+            <td>${new Date(product.createdAt).toLocaleDateString()}</td>
             <td>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
+                <button class="edit-btn" data-id="${product.productId}">Edit</button>
+                <button class="delete-btn" data-id="${product.productId}">Delete</button>
             </td>
         `;
+
+        const deleteBtn = row.querySelector('.delete-btn');
+        deleteBtn.addEventListener('click', () => deleteProduct(product.productId, row));
+
+        const editBtn = row.querySelector('.edit-btn');
+        editBtn.addEventListener('click', () => editProduct(product, row));
+    }
+
+// Function to delete a product
+async function deleteProduct(productId, row) {
+    const confirmed = confirm("Are you sure you want to delete this product?");
+    if (!confirmed) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/products/${productId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            console.log(`Product with ID ${productId} deleted successfully`);
+            
+            location.reload(); // Reload the page
+        } else {
+            const errorData = await response.json();
+            console.error('Failed to delete product:', errorData.message);
+        }
+    } catch (error) {
+        console.error('Error deleting product:', error);
+    }
+}
+
+
+    // Function to edit a product in the table
+    function editProduct(product, row) {
+        const originalProduct = { ...product };
+
+        row.innerHTML = `
+            <td><input type="text" value="${product.productId}" disabled></td>
+            <td><input type="text" value="${product.productName}"></td>
+            <td><input type="text" value="${product.productDescription}"></td>
+            <td><input type="number" value="${product.price}"></td>
+            <td><input type="number" value="${product.inStock}"></td>
+            <td>${new Date(product.createdAt).toLocaleDateString()}</td>
+            <td>
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn">Cancel</button>
+            </td>
+        `;
+
+        const saveBtn = row.querySelector('.save-btn');
+        const cancelBtn = row.querySelector('.cancel-btn');
+
+        //save not working
+        saveBtn.addEventListener('click', () => saveProduct(product.productId, row));
+        cancelBtn.addEventListener('click', () => cancelEdit(row, originalProduct));
+    }
+
+    // Save edited product not working?
+    async function saveProduct(productId, row) {
+        const inputs = row.querySelectorAll('input');
+        const updatedProduct = {
+            productId: productId,
+            productName: inputs[1].value,
+            productDescription: inputs[2].value,
+            price: parseFloat(inputs[3].value),
+            inStock: parseFloat(inputs[4].value),
+        };
+
+        try {
+            const response = await fetch(`http://localhost:3000/products/${productId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProduct),
+            });
+
+            if (response.ok) {
+                const updatedProductData = await response.json();
+                console.log('Product updated:', updatedProductData);
+                
+                row.innerHTML = `
+                    <td>${updatedProductData.productId}</td>
+                    <td>${updatedProductData.productName}</td>
+                    <td>${updatedProductData.productDescription}</td>
+                    <td>${updatedProductData.price}</td>
+                    <td>${updatedProductData.inStock}</td>
+                    <td>${new Date(updatedProductData.createdAt).toLocaleDateString()}</td>
+                    <td>
+                        <button class="edit-btn" data-id="${updatedProductData.productId}">Edit</button>
+                        <button class="delete-btn" data-id="${updatedProductData.productId}">Delete</button>
+                    </td>
+                `;
+
+            } else {
+                const errorData = await response.json();
+                console.error('Failed to update product:', errorData.message);
+            }
+        } catch (error) {
+            console.error('Error saving product:', error);
+        }
+    }
+
+    // Cancel edit and restore the row
+    function cancelEdit(row, originalProduct) {
+        row.innerHTML = `
+            <td>${originalProduct.productId}</td>
+            <td>${originalProduct.productName}</td>
+            <td>${originalProduct.productDescription}</td>
+            <td>${originalProduct.price}</td>
+            <td>${originalProduct.inStock}</td>
+            <td>${new Date(originalProduct.createdAt).toLocaleDateString()}</td>
+            <td>
+                <button class="edit-btn" data-id="${originalProduct.productId}">Edit</button>
+                <button class="delete-btn" data-id="${originalProduct.productId}">Delete</button>
+            </td>
+        `;
+
+        const editBtn = row.querySelector('.edit-btn');
+        const deleteBtn = row.querySelector('.delete-btn');
+        
+        editBtn.addEventListener('click', () => editProduct(originalProduct, row));
+        deleteBtn.addEventListener('click', () => deleteProduct(originalProduct.productId, row));
     }
 });

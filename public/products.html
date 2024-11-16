@@ -5,41 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Table</title>
     <link rel="stylesheet" href="prodStyles.css">
-
 </head>
 <body>
-    <h1>Inventory</h1>
+    <div class="container">
+        <!-- Form to add new product -->
+        <div class="form-container">
+            <h3>Add New Product</h3>
+            <form id="addProductForm">
+                <input type="number" id="productId" placeholder="ID AUTO Generates" disabled>
+                <input type="text" id="productName" placeholder="Product Name" required>
+                <input type="text" id="productDescription" placeholder="Product Description" required>
+                <input type="int" id="productPrice" placeholder="Product Price" required>
+                <input type="number" id="inStock" placeholder="In Stock" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
 
-    <!-- Table to display products -->
-    <table id="productTable">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Product</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Date</th>
-                <th>Edit / Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Product rows will be added dynamically here -->
-        </tbody>
-    </table>
+        <!-- Table to display products -->
+        <div class="table-container">
+            <h3>Product Inventory</h3>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Date</th>
+                        <th>Edit / Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <!-- Form to add new product -->
-    <h1>Add New Product</h1>
-    <form id="addProductForm">
-        <input type="number" id="productId" placeholder="Product ID" required>
-        <input type="text" id="productName" placeholder="Product Name" required>
-        <input type="text" id="productDescription" placeholder="Product Description" required>
-        <input type="number" id="productPrice" placeholder="Product Price" required>
-        <input type="number" id="inStock" placeholder="In Stock" required>
-        <button type="submit">Add Product</button>
-    </form>
-
-    <!-- Include the JavaScript file -->
     <script src="app.js"></script>
 </body>
 </html>

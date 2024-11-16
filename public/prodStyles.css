@@ -10,6 +10,7 @@ body {
     color: #5d3d8c;
     line-height: 1.6;
     padding: 20px;
+    border-radius: 10px;
 }
 
 h1 {
@@ -19,47 +20,20 @@ h1 {
     margin-bottom: 30px;
 }
 
-h3 {
-    color: #6a3c92;
-    margin-bottom: 15px;
-    font-size: 24px;
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-top: 30px;
+    border-radius: 10px;
+    padding: 20px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #d1a6f7;
-}
-
-th {
-    background-color: #d0a6f4;
-    color: white;
-    font-size: 18px;
-}
-
-td {
-    background-color: #fff;
-}
-
-button {
-    background-color: #9b58b6;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #6a3c92;
+.form-container {
+    background-color: #e3c9f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -83,11 +57,57 @@ input:focus {
     outline: none;
 }
 
+button {
+    background-color: #9b58b6;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #6a3c92;
+}
+
+.table-container {
+    background-color: #e3c9f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #d1a6f7;
+}
+
+th {
+    background-color: #d0a6f4;
+    color: white;
+    font-size: 18px;
+}
+
+td {
+    background-color: #fff;
+}
+
 tbody tr:hover {
     background-color: #f1e0ff;
 }
 
-/* For small screens */
+/* Mobile-Friendly Styles */
 @media (max-width: 768px) {
     h1 {
         font-size: 28px;
@@ -97,12 +117,8 @@ tbody tr:hover {
         font-size: 20px;
     }
 
-    table {
-        font-size: 14px;
-    }
-
-    th, td {
-        padding: 8px;
+    .container {
+        grid-template-columns: 1fr;
     }
 
     form {
@@ -117,5 +133,17 @@ tbody tr:hover {
     button {
         font-size: 14px;
         padding: 8px 16px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    .table-container {
+        margin-top: 20px;
     }
 }
