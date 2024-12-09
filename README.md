@@ -21,6 +21,12 @@ Milestone #3
     update DOM with data from API
     Create modern UI to show data
 
+Milestone #4 
+    Deploy web application to a VM in the cloud
+    Deploy to a container in the cloud
+
+    Having trouble getting working
+
 
 
 

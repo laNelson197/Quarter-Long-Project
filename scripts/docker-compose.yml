@@ -1,0 +1,24 @@
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: x1n7qc4n9q48qn
+      MYSQL_DATABASE: products
+      MYSQL_USER: lanelson
+      MYSQL_PASSWORD: r38r3fq4fr4w4t
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: x1n7qc4n9q48qn
+    ports:
+      - "8080:80"
